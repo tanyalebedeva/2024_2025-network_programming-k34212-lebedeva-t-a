@@ -28,22 +28,22 @@ Date of finished: 14.10.2024
 1. В связи с проблемами с доступом к Microsoft Azure, а также с отсуствием бесплатных аналогов, в качесвте сервера была использована виртуальная машина Ubuntu 24.04 на Oracle Virtual box.    
     ![image](https://github.com/user-attachments/assets/83f8f3bd-d4f7-437b-8d32-072c74e3a326)
 2. Обновлена операционнная система с помощью следующих команд:    
-```
-sudo apt update & sudo apt upgrade
-sudo do-release-upgrade
-```
+    ```
+    sudo apt update & sudo apt upgrade
+    sudo do-release-upgrade
+    ```
 3. Далеее установлены python3 и Ansible:    
-```
-sudo apt install python3-pip
-ls -la /usr/bin/python3.6
-sudo pip3 install ansibl
-```
+    ```
+    sudo apt install python3-pip
+    ls -la /usr/bin/python3.6
+    sudo pip3 install ansibl
+    ```
     ![image](https://github.com/user-attachments/assets/5979cb2d-64ff-4a03-b07c-d3f5a88babeb)    
 
 4. Установлен Wireguard c помощью команды:    
-```
-sudo apt install wireguard
-```
+    ```
+    sudo apt install wireguard
+    ```
     ![image](https://github.com/user-attachments/assets/5347abb2-3b64-46b3-8e39-5ba7d5dbd295)    
 
 5. Сгенерирован приватный ключ на сервере с помошью команды:    
@@ -102,11 +102,11 @@ sudo apt install wireguard
      
 ### Тестирование результатов
 Проверка доступонсти клиента с сервера    
-    ![image](https://github.com/user-attachments/assets/73f1394d-facd-4fcd-889e-4040fbe074a5)    
+     ![image](https://github.com/user-attachments/assets/73f1394d-facd-4fcd-889e-4040fbe074a5)    
 
 Проверка доступности сервера    
 
-    ![image](https://github.com/user-attachments/assets/13e68f5e-e174-4ff5-a631-8ea62318d90f)
+     ![image](https://github.com/user-attachments/assets/13e68f5e-e174-4ff5-a631-8ea62318d90f)
 
 ## Выводы
 ### В ходе выполнения лабораторной работы были выполнены следующие шаги:
