@@ -25,21 +25,39 @@ Date of finished: 14.10.2024
 Целью данной работы является развертывание виртуальной машины на базе платформы Microsoft Azure с установленной системой контроля конфигураций Ansible и установка CHR в VirtualBox.
 
 ## Ход работы
-### Настройка сервера
 В связи с проблемами с доступом к Microsoft Azure, а также с отсуствием бесплатных аналогов, в качесвте сервера была использована виртуальная машина Ubuntu 24.04 на Oracle Virtual box.    
 ![image](https://github.com/user-attachments/assets/83f8f3bd-d4f7-437b-8d32-072c74e3a326)
-Обновить операционнцю систему можно с помощью следующих команд:    
+Обновлена операционнная система с помощью следующих команд:    
 ```
 sudo apt update & sudo apt upgrade
 sudo do-release-upgrade
 ```
-Далеее необходимо установить python3 и Ansible:    
+Далеее установлены python3 и Ansible:    
 ```
 sudo apt install python3-pip
 ls -la /usr/bin/python3.6
 sudo pip3 install ansibl
 ```
-![image](https://github.com/user-attachments/assets/5979cb2d-64ff-4a03-b07c-d3f5a88babeb)
+![image](https://github.com/user-attachments/assets/5979cb2d-64ff-4a03-b07c-d3f5a88babeb)    
+
+Установлен Wireguard c помощью команды:    
+```
+sudo apt install wireguard
+```
+![image](https://github.com/user-attachments/assets/5347abb2-3b64-46b3-8e39-5ba7d5dbd295)    
+
+Сгенерирован приватный ключ на сервере с помошью команды:    
+```
+wg genkey | tee privatekey
+```
+
+Далее сгенерирован публичный ключ с помощью команды:    
+```
+cat privatekey | wg pubkey | tee publickey
+```
+![image](https://github.com/user-attachments/assets/936f01e3-ddfa-4da2-8f81-f5fd9f5119f0)    
+
+
 
 
 
