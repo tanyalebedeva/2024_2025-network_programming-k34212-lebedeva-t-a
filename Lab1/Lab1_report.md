@@ -64,7 +64,7 @@ cat privatekey | wg pubkey | tee publickey
 ![image](https://github.com/user-attachments/assets/a82fbf21-73fb-4168-92ef-d18dda0a24b9)    
 
 8. Для настройки клиента необходимо было подключиться к роутеру через WinBox.    
-   ![image](https://github.com/user-attachments/assets/226c3fca-065b-4dca-82df-e4286fa9180d)
+![image](https://github.com/user-attachments/assets/226c3fca-065b-4dca-82df-e4286fa9180d)
 
 На WinBox был создан интерфейс Wireguard wg0, на котором были сформированы приватный и публичный ключи клиента.   
 ![image](https://github.com/user-attachments/assets/75c55ece-ee53-4e4a-9b46-4c806551f272)   
@@ -83,12 +83,12 @@ cat privatekey | wg pubkey | tee publickey
     AllowedIPs = 10.14.14.2/24
     ```
 10. На клиенте в разделе Wireguard был создан peer, в котором необходимо было ввести публичный ключ сфрмированный на сервере, настройки VPN.   
-    ![image](https://github.com/user-attachments/assets/a70a6584-ed0a-4d44-b0cf-f1e9ed702c83)
+![image](https://github.com/user-attachments/assets/a70a6584-ed0a-4d44-b0cf-f1e9ed702c83)
     В Endpoint нужно ввести внешний адрес сервера, котоорый можно узнать с помощью команды:
     ```
     ip a
     ```
-    ![image](https://github.com/user-attachments/assets/f5c09091-14a3-497e-8634-9270313ab29a)
+![image](https://github.com/user-attachments/assets/f5c09091-14a3-497e-8634-9270313ab29a)
     
 11. Также на сервере необходимо запустить службу с помощью команды:
     ```
@@ -96,7 +96,7 @@ cat privatekey | wg pubkey | tee publickey
     sudo systemctl status wg-quick@wg0
     ```
         
-    ![image](https://github.com/user-attachments/assets/5379f7e5-f006-4510-8b56-5fafdd249fe2)
+![image](https://github.com/user-attachments/assets/5379f7e5-f006-4510-8b56-5fafdd249fe2)
     
 ### Тестирование результатов
 Проверка доступонсти клиента с сервера    
