@@ -25,14 +25,14 @@ Date of finished: 14.10.2024
 Целью данной работы является развертывание виртуальной машины на базе платформы Microsoft Azure с установленной системой контроля конфигураций Ansible и установка CHR в VirtualBox.
 
 ## Ход работы
-В связи с проблемами с доступом к Microsoft Azure, а также с отсуствием бесплатных аналогов, в качесвте сервера была использована виртуальная машина Ubuntu 24.04 на Oracle Virtual box.    
+1. В связи с проблемами с доступом к Microsoft Azure, а также с отсуствием бесплатных аналогов, в качесвте сервера была использована виртуальная машина Ubuntu 24.04 на Oracle Virtual box.    
 ![image](https://github.com/user-attachments/assets/83f8f3bd-d4f7-437b-8d32-072c74e3a326)
-Обновлена операционнная система с помощью следующих команд:    
+2. Обновлена операционнная система с помощью следующих команд:    
 ```
 sudo apt update & sudo apt upgrade
 sudo do-release-upgrade
 ```
-Далеее установлены python3 и Ansible:    
+3. Далеее установлены python3 и Ansible:    
 ```
 sudo apt install python3-pip
 ls -la /usr/bin/python3.6
@@ -40,13 +40,13 @@ sudo pip3 install ansibl
 ```
 ![image](https://github.com/user-attachments/assets/5979cb2d-64ff-4a03-b07c-d3f5a88babeb)    
 
-Установлен Wireguard c помощью команды:    
+4. Установлен Wireguard c помощью команды:    
 ```
 sudo apt install wireguard
 ```
 ![image](https://github.com/user-attachments/assets/5347abb2-3b64-46b3-8e39-5ba7d5dbd295)    
 
-Сгенерирован приватный ключ на сервере с помошью команды:    
+5. Сгенерирован приватный ключ на сервере с помошью команды:    
 ```
 wg genkey | tee privatekey
 ```
@@ -56,6 +56,61 @@ wg genkey | tee privatekey
 cat privatekey | wg pubkey | tee publickey
 ```
 ![image](https://github.com/user-attachments/assets/936f01e3-ddfa-4da2-8f81-f5fd9f5119f0)    
+
+7. В качестве VPN клиента использован CHR (RouterOS).    
+   
+![image](https://github.com/user-attachments/assets/3321e003-9d66-4ff9-b79b-8f2fca662b36)    
+
+![image](https://github.com/user-attachments/assets/a82fbf21-73fb-4168-92ef-d18dda0a24b9)    
+
+8. Для настройки клиента необходимо было подключиться к роутеру через WinBox.    
+   ![image](https://github.com/user-attachments/assets/226c3fca-065b-4dca-82df-e4286fa9180d)
+
+На WinBox был создан интерфейс Wireguard wg0, на котором были сформированы приватный и публичный ключи клиента.   
+![image](https://github.com/user-attachments/assets/75c55ece-ee53-4e4a-9b46-4c806551f272)   
+
+Созданному интерфейсу был присвоен IP-адрес.    
+![image](https://github.com/user-attachments/assets/4ac57128-7901-4342-ab17-523d30c5d8b2)
+
+
+9. На сервере был создан конфигурационный файл для настройки VPN-туннеля, куда в Peer необходимо ввести публичный ключ клиента.
+    ```
+    GNU nano 7.2 /etc/wireguard/wg0.conf
+    [Interface]
+    PrivateKey = aBsClDOOaWYdCFZHXfgOc4BgsA+s/cnx8k8MF6GzT2Y=Address = 10.14.14.1/24
+    ListenPort = 13231
+    [Peer]PublicKey = sQ1artOIv6FbZ93MMQ2hZKqPbwdiwLK3Kjm4yfF43g8=
+    AllowedIPs = 10.14.14.2/24
+    ```
+10. На клиенте в разделе Wireguard был создан peer, в котором необходимо было ввести публичный ключ сфрмированный на сервере, настройки VPN.   
+    ![image](https://github.com/user-attachments/assets/a70a6584-ed0a-4d44-b0cf-f1e9ed702c83)
+    В Endpoint нужно ввести внешний адрес сервера, котоорый можно узнать с помощью команды:
+    ```
+    ip a
+    ```
+    ![image](https://github.com/user-attachments/assets/f5c09091-14a3-497e-8634-9270313ab29a)
+    
+11. Также на сервере необходимо запустить службу с помощью команды:
+    ```
+    sudo systemctl start wg-quick@wg0
+    sudo systemctl status wg-quick@wg0
+    ```
+        
+    ![image](https://github.com/user-attachments/assets/5379f7e5-f006-4510-8b56-5fafdd249fe2)
+    
+### Тестирование результатов
+Проверка доступонсти клиента с сервера    
+![image](https://github.com/user-attachments/assets/73f1394d-facd-4fcd-889e-4040fbe074a5)    
+
+Проверка доступности сервера    
+
+![image](https://github.com/user-attachments/assets/13e68f5e-e174-4ff5-a631-8ea62318d90f)
+
+
+
+
+
+
 
 
 
