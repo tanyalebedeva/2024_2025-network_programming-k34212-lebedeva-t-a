@@ -25,9 +25,10 @@ Date of finished: 14.10.2024
 Целью данной работы является развертывание виртуальной машины на базе платформы Microsoft Azure с установленной системой контроля конфигураций Ansible и установка CHR в VirtualBox.
 
 ## Ход работы
-1. В связи с проблемами с доступом к Microsoft Azure, а также с отсуствием бесплатных аналогов, в качесвте сервера была использована виртуальная машина Ubuntu 24.04 на Oracle Virtual box.    
+1. В связи с проблемами с доступом к Microsoft Azure, а также с отсуствием бесплатных аналогов, в качесвте сервера была использована виртуальная машина Ubuntu 24.04 на Oracle Virtual box.
+
 ![image](https://github.com/user-attachments/assets/83f8f3bd-d4f7-437b-8d32-072c74e3a326)
-2. Обновлена операционнная система с помощью следующих команд:    
+3. Обновлена операционнная система с помощью следующих команд:    
 ```
 sudo apt update & sudo apt upgrade
 sudo do-release-upgrade
@@ -64,13 +65,16 @@ cat privatekey | wg pubkey | tee publickey
 
 ![image](https://github.com/user-attachments/assets/a82fbf21-73fb-4168-92ef-d18dda0a24b9)    
 
-8. Для настройки клиента необходимо было подключиться к роутеру через WinBox.     
+8. Для настройки клиента необходимо было подключиться к роутеру через WinBox.
+
 ![image](https://github.com/user-attachments/assets/226c3fca-065b-4dca-82df-e4286fa9180d)
 
-На WinBox был создан интерфейс Wireguard wg0, на котором были сформированы приватный и публичный ключи клиента.   
+На WinBox был создан интерфейс Wireguard wg0, на котором были сформированы приватный и публичный ключи клиента.    
+
 ![image](https://github.com/user-attachments/assets/75c55ece-ee53-4e4a-9b46-4c806551f272)   
 
 Созданному интерфейсу был присвоен IP-адрес.    
+
 ![image](https://github.com/user-attachments/assets/4ac57128-7901-4342-ab17-523d30c5d8b2)
 
 
@@ -85,12 +89,14 @@ AllowedIPs = 10.14.14.2/24
 ```    
 ![image](https://github.com/user-attachments/assets/363505e1-6bd3-4170-9a28-f8180c8b5d4f)
 
-10. На клиенте в разделе Wireguard был создан peer, в котором необходимо было ввести публичный ключ сфрмированный на сервере, настройки VPN.   
+10. На клиенте в разделе Wireguard был создан peer, в котором необходимо было ввести публичный ключ сфрмированный на сервере, настройки VPN.
+
 ![image](https://github.com/user-attachments/assets/a70a6584-ed0a-4d44-b0cf-f1e9ed702c83)
 В Endpoint нужно ввести внешний адрес сервера, котоорый можно узнать с помощью команды:
 ```
 ip a
-```
+```    
+
 ![image](https://github.com/user-attachments/assets/f5c09091-14a3-497e-8634-9270313ab29a)
     
 11. Также на сервере необходимо запустить службу с помощью команды:
