@@ -34,13 +34,25 @@ Date of finished: 24.11.2024
    
    ![image](https://github.com/user-attachments/assets/21bd3c1f-a41f-480b-8ea5-22d477d512c1)
    
-   Проверка доступности сервера с первого и второго CHR:
+   Проверка доступности с сервера первого и второго CHR:
    ![image](https://github.com/user-attachments/assets/f03002d6-6c34-43b8-9d93-d8ebede1f4a0)
 
-3. Был создан файл inventory.yaml, содержащий информацию об узлах, на которых следует производить настройку:
+   Проверка доступности сервера с первого и второго CHR:
+
+   ![image](https://github.com/user-attachments/assets/001b729f-e6fa-49bc-9172-bf4cbf4f9ab3)
+   ![image](https://github.com/user-attachments/assets/7bef51d1-6a71-4fce-a10d-d90301b199fb)    
+
+   Проверка доступности CHR-1 -> CHR-2:
+   ![image](https://github.com/user-attachments/assets/13119f8b-2f38-4c7c-9662-296aed55f7d1)    
+
+   Проверка доступности CHR-2 -> CHR-1:
+   ![image](https://github.com/user-attachments/assets/f0146775-8ff1-4c86-973c-69cfb3a340aa)
+
+
+4. Был создан файл inventory.yaml, содержащий информацию об узлах, на которых следует производить настройку:
    ![image](https://github.com/user-attachments/assets/99119bec-c107-4ddb-b681-d339df9e9f98)
 
-   Он же измененный, после удаления пользователя admin:    
+   Он же, измененный, после удаления пользователя admin:    
    ![image](https://github.com/user-attachments/assets/2dfd76bb-5eeb-4739-8e02-17996f5406b0)
 
 
