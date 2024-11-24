@@ -49,7 +49,12 @@ Date of finished: 24.11.2024
    ![image](https://github.com/user-attachments/assets/f0146775-8ff1-4c86-973c-69cfb3a340aa)
 
 
-4. Был создан файл inventory.yaml, содержащий информацию об узлах, на которых следует производить настройку:
+4. Используя Ansible, настроим сразу на 2-х CHR:
+   логин/пароль    
+   NTP Client    
+   OSPF с указанием Router ID    
+   Соберем данные по OSPF топологии и полный конфиг устройства    
+   Был создан файл inventory.yaml, содержащий информацию об узлах, на которых следует производить настройку:
    ![image](https://github.com/user-attachments/assets/99119bec-c107-4ddb-b681-d339df9e9f98)
 
    Он же, измененный, после удаления пользователя admin:    
