@@ -64,13 +64,20 @@ Date of finished: 24.11.2024
 5. Для настройки устройств был создан Ansible плейбук chr_playbook.yaml:
    ![image](https://github.com/user-attachments/assets/454efb98-7352-44d9-a796-e72b421a2d6a)
    ![image](https://github.com/user-attachments/assets/1f360edd-73e0-4ca4-b28c-2c39788e4a38)
+   Этот Ansible плейбук настраивает два маршрутизатора RouterOS:    
+   Создаёт пользователя с полными правами доступа.    
+   Настроивает NTP-клиент для синхронизации времени.    
+   Настроивает OSPF (создаёт экземпляр, устанавливает Router ID и область).    
+   Включает OSPF на интерфейсах WireGuard для каждого устройства.    
+   Собирает полную конфигурацию и данные о соседях OSPF.   
+   Сохраняет конфигурации и данные в файлы для дальнейшего анализа.    
    
-6. Выполнение плейбука с помощью команды    
+7. Выполнение плейбука с помощью команды    
    ```ansible-playbook -i inventory.yaml configure_chr.yml```
    ![image](https://github.com/user-attachments/assets/34243124-26d6-45da-adf4-a8c830c69362)
    ![image](https://github.com/user-attachments/assets/b2d93d35-addc-4370-9f60-fab6c42925d8)
 
-7. Вывод конфига устройств:
+8. Вывод конфига устройств:
    ```
    TASK [Print OSPF topology]         *********************************************************************************************************************************************************
    ok: [chr1] => {
@@ -232,12 +239,12 @@ Date of finished: 24.11.2024
     }    
    ```
    
-8. Надо сверить, что полученные конфигурации корректны:    
+9. Надо сверить, что полученные конфигурации корректны:    
    ![image](https://github.com/user-attachments/assets/20e4ed8c-33df-4652-8eed-c9098f972f75)
    ![image](https://github.com/user-attachments/assets/ceeeffd5-c936-4c5b-b6e1-6162a24ffd0e)
    ![image](https://github.com/user-attachments/assets/6ee827f4-7886-4fbf-b2dd-eccd41e9b4a4)
 
-9. Схема связи на draw.io:
+10. Схема связи на draw.io:
     ![image](https://github.com/user-attachments/assets/60c39117-02a8-4f1a-82a3-38ea5b7c2538)    
 
 ## Выводы
