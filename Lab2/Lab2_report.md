@@ -30,7 +30,7 @@ Date of finished: 24.11.2024
    На созданном роутере CHR2 был настроен Wireguard интерфейс:    
    ![image](https://github.com/user-attachments/assets/f5627c2f-0e37-4de0-a709-b6468c4eb785)
     
-   Обновлен файл конфигурации на самом сервере, была добавлена информация о новом клиенте с адресом 10.14.14.3:
+3. Обновлен файл конфигурации на самом сервере, была добавлена информация о новом клиенте с адресом 10.14.14.3:
    
    ![image](https://github.com/user-attachments/assets/21bd3c1f-a41f-480b-8ea5-22d477d512c1)
    
@@ -54,21 +54,185 @@ Date of finished: 24.11.2024
 
    Он же, измененный, после удаления пользователя admin:    
    ![image](https://github.com/user-attachments/assets/2dfd76bb-5eeb-4739-8e02-17996f5406b0)
+   ![image](https://github.com/user-attachments/assets/1ea8c4b5-d514-4154-a95a-aa87d331d68e)
+
+5. Для настройки устройств был создан Ansible плейбук chr_playbook.yaml:
+   ![image](https://github.com/user-attachments/assets/454efb98-7352-44d9-a796-e72b421a2d6a)
+   ![image](https://github.com/user-attachments/assets/1f360edd-73e0-4ca4-b28c-2c39788e4a38)
+   
+6. Выполнение плейбука с помощью команды    
+   ```ansible-playbook -i inventory.yaml configure_chr.yml```
+   ![image](https://github.com/user-attachments/assets/34243124-26d6-45da-adf4-a8c830c69362)
+   ![image](https://github.com/user-attachments/assets/b2d93d35-addc-4370-9f60-fab6c42925d8)
+
+7. Вывод конфига устройств:
+   ```
+TASK [Save OSPF Neighbors to file] *************************************************************************************************************************************************
+ok: [chr1]
+ok: [chr2]
+
+TASK [Print OSPF topology] *********************************************************************************************************************************************************
+ok: [chr1] => {
+    "ospf_neighbors.stdout_lines": [
+        [
+            "Flags: V - virtual; D - dynamic"
+        ]
+    ]
+}
+ok: [chr2] => {
+    "ospf_neighbors.stdout_lines": [
+        [
+            "Flags: V - virtual; D - dynamic"
+        ]
+    ]
+}
+
+TASK [Print full config] ***********************************************************************************************************************************************************
+ok: [chr1] => {
+    "full_config.stdout_lines": [
+        [
+            "# 2024-11-24 16:17:31 by RouterOS 7.16.1",
+            "# software id = ",
+            "#",
+            "/interface wireguard",
+            "add listen-port=13231 mtu=1420 name=wg0",
+            "/interface list",
+            "add name=WAN",
+            "add name=LAN",
+            "/ip pool",
+            "add name=vpn ranges=192.168.89.2-192.168.89.255",
+            "/ppp profile",
+            "set *FFFFFFFE local-address=192.168.89.1 remote-address=vpn",
+            "/routing ospf instance",
+            "add disabled=no name=default router-id=1.1.1.1",
+            "/routing ospf area",
+            "add disabled=no instance=default name=backbone",
+            "/interface l2tp-server server",
+            "set enabled=yes use-ipsec=yes",
+            "/interface list member",
+            "add interface=ether1 list=WAN",
+            "/interface wireguard peers",
+            "add allowed-address=10.14.14.0/24,224.0.0.5/32,1.1.1.1/32 endpoint-address=\\",
+            "    192.168.111.54 endpoint-port=13231 interface=wg0 name=peer \\",
+            "    persistent-keepalive=25s public-key=\\",
+            "    \"HAihpVWrqkMngJS+jrJVR+BDHda44aM0dzguYkXusRs=\"",
+            "/ip address",
+            "add address=10.14.14.2/24 interface=wg0 network=10.14.14.0",
+            "add address=1.1.1.1 interface=lo network=1.1.1.1",
+            "/ip dhcp-client",
+            "add interface=ether1",
+            "/ip dns",
+            "set allow-remote-requests=yes servers=8.8.8.8,8.8.4.4",
+            "/ip firewall filter",
+            "add action=accept chain=input protocol=icmp",
+            "add action=accept chain=input protocol=ospf",
+            "add action=accept chain=output protocol=ospf",
+            "add action=accept chain=input protocol=ospf",
+            "add action=accept chain=output protocol=ospf",
+            "add action=accept chain=input protocol=ospf",
+            "add action=accept chain=output protocol=ospf",
+            "/ip firewall nat",
+            "add action=masquerade chain=srcnat out-interface=ether1",
+            "add action=masquerade chain=srcnat comment=\"masq. vpn traffic\" src-address=\\",
+            "    192.168.89.0/24",
+            "/ip route",
+            "add disabled=yes dst-address=0.0.0.0/0 gateway=192.168.110.1",
+            "/ppp secret",
+            "add name=vpn",
+            "/routing ospf interface-template",
+            "add area=backbone dead-interval=20s disabled=no hello-interval=5s interfaces=\\",
+            "    wg0 type=ptp",
+            "/system logging",
+            "add topics=ospf",
+            "add topics=ospf",
+            "/system note",
+            "set show-at-login=no",
+            "/system ntp client",
+            "set enabled=yes",
+            "/system ntp client servers",
+            "add address=194.190.168.1"
+        ]
+    ]
+}
+ok: [chr2] => {
+    "full_config.stdout_lines": [
+        [
+            "# 2024-11-24 16:17:41 by RouterOS 7.16.1",
+            "# software id = ",
+            "#",
+            "/disk",
+            "set sata1 media-interface=none media-sharing=no",
+            "/interface ethernet",
+            "set [ find default-name=ether1 ] name=ether3",
+
+t, [24.11.2024 20:34]
+"/interface wireguard",
+            "add listen-port=13231 mtu=1420 name=wg1",
+            "/interface list",
+            "add name=WAN",
+            "add name=LAN",
+            "/ip pool",
+            "add name=vpn ranges=192.168.89.2-192.168.89.255",
+            "/ppp profile",
+            "set *FFFFFFFE local-address=192.168.89.1 remote-address=vpn",
+            "/routing ospf instance",
+            "add disabled=no name=default router-id=2.2.2.2",
+            "/routing ospf area",
+            "add disabled=no instance=default name=backbone",
+            "/ipv6 settings",
+            "set max-neighbor-entries=16384",
+            "/interface l2tp-server server",
+            "set enabled=yes use-ipsec=yes",
+            "/interface list member",
+            "add interface=*2 list=WAN",
+            "/interface wireguard peers",
+            "add allowed-address=10.14.14.0/24,224.0.0.5/32,2.2.2.2/32 endpoint-address=\\",
+            "    192.168.111.54 endpoint-port=13231 interface=wg1 name=peer \\",
+            "    persistent-keepalive=25s public-key=\\",
+            "    \"HAihpVWrqkMngJS+jrJVR+BDHda44aM0dzguYkXusRs=\"",
+            "/ip address",
+            "add address=10.14.14.3/24 interface=wg1 network=10.14.14.0",
+            "add address=192.168.110.90/23 interface=ether3 network=192.168.110.0",
+            "add address=2.2.2.2 interface=lo network=2.2.2.2",
+            "/ip dhcp-client",
+            "# Interface not active",
+            "add interface=*2",
+            "/ip dns",
+            "set allow-remote-requests=yes servers=8.8.8.8,8.8.4.4",
+            "/ip firewall filter",
+            "add action=accept chain=input protocol=icmp",
+            "add action=accept chain=input protocol=ospf",
+            "add action=accept chain=output protocol=ospf",
+            "add action=accept chain=input protocol=ospf",
+            "add action=accept chain=output protocol=ospf",
+            "/ip firewall nat",
+            "# no interface",
+            "add action=masquerade chain=srcnat out-interface=*2",
+            "add action=masquerade chain=srcnat comment=\"masq. vpn traffic\" src-address=\\",
+            "    192.168.89.0/24",
+            "/ip route",
+            "add dst-address=10.14.14.0/24 gateway=wg1",
+            "add dst-address=10.14.14.0/24 gateway=wg1",
+            "/ppp secret",
+            "add name=vpn",
+            "/routing ospf interface-template",
+            "add area=backbone dead-interval=20s disabled=no hello-interval=5s interfaces=\\",
+            "    wg1 type=ptp",
+            "/system logging",
+            "add topics=ospf",
+            "add topics=ospf",
+            "/system note",
+            "set show-at-login=no",
+            "/system ntp client",
+            "set enabled=yes",
+            "/system ntp client servers",
+            "add address=194.190.168.1"
+        ]
+    ]
+}
+```
 
 
-5. Используя Ansible, настроить сразу на 2-х CHR:
-
-логин/пароль;
-
-NTP Client;
-
-OSPF с указанием Router ID; 4. Собрать данные по OSPF топологии и полный конфиг устройства.
-
-Что использовать: routeros_facts, routeros_commands.
 
 Результаты лабораторной работы
-В результате данной работы у вас должно быть:
 
-2 файла с конфигурациями устройств
-Схема связи нарисованная вами в draw.io или Visio.
-Результаты пингов, проверки локальной связности.
