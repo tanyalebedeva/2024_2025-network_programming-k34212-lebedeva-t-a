@@ -232,9 +232,9 @@ Date of finished: 24.11.2024
    ![image](https://github.com/user-attachments/assets/ceeeffd5-c936-4c5b-b6e1-6162a24ffd0e)
    ![image](https://github.com/user-attachments/assets/6ee827f4-7886-4fbf-b2dd-eccd41e9b4a4)
 
-   
+9. Схема связи на draw.io:
+    ![image](https://github.com/user-attachments/assets/60c39117-02a8-4f1a-82a3-38ea5b7c2538)    
 
-
-
-Результаты лабораторной работы
+## Выводы
+В ходе выполнения данной лабораторной работы был настроен OSPF через WireGuard на MikroTik, NTP Client и авторизация с помощью Ansible
 
