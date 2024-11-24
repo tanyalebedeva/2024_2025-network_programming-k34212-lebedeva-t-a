@@ -226,6 +226,14 @@ Date of finished: 24.11.2024
         ]     
     }    
    ```
+   
+8. Надо сверить, что полученные конфигурации корректны:
+   ![image](https://github.com/user-attachments/assets/20e4ed8c-33df-4652-8eed-c9098f972f75)
+   ![image](https://github.com/user-attachments/assets/ceeeffd5-c936-4c5b-b6e1-6162a24ffd0e)
+   ![image](https://github.com/user-attachments/assets/6ee827f4-7886-4fbf-b2dd-eccd41e9b4a4)
+
+   
+
 
 
 Результаты лабораторной работы
