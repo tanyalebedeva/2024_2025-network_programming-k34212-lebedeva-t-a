@@ -1,0 +1,77 @@
+---
+- name: Configure CHR Devices
+  hosts: all
+  gather_facts: no
+  collections:
+    - community.routeros
+  vars:
+    ntp_server: "pool.ntp.org"
+  tasks:
+    - name: Create new admin user
+      routeros_command:
+        commands:
+          - /user add name=newadmin group=full password=newpassword
+
+    - name: Configure NTP Client
+      routeros_command:
+        commands:
+          - /system ntp client set enabled=yes primary-ntp={{ ntp_server }}
+
+    - name: Create OSPF instance
+      routeros_command:
+        commands:
+          - /routing ospf instance add name=default
+
+    - name: Set Router ID for OSPF instance
+      routeros_command:
+        commands:
+          - /routing ospf instance set [find name=default] router-id={{ router_id }}
+      vars:
+        router_id: "{{ '1.1.1.1' if ansible_host == '10.14.14.2' else '2.2.2.2' }}"
+
+    - name: Create OSPF area backbone
+      routeros_command:
+        commands:
+          - /routing ospf area add name=backbone area-id=0.0.0.0 instance=default
+
+    - name: Enable OSPF on WireGuard interface on CHR1
+      routeros_command:
+        commands:
+          - /routing ospf interface-template add area=0.0.0.0 interfaces=wg0 type=point-to-point
+      when: ansible_host == "10.14.14.2"
+
+    - name: Enable OSPF on WireGuard interface on CHR2
+      routeros_command:
+        commands:
+          - /routing ospf interface-template add area=0.0.0.0 interfaces=wg1 type=point-to-point
+      when: ansible_host == "10.14.14.3"
+
+    - name: Gather full configuration
+      routeros_command:
+        commands:
+          - /export
+      register: full_config
+
+    - name: Save configuration to file
+      copy:
+        content: "{{ full_config.stdout }}"
+        dest: "./configs/{{ inventory_hostname }}_config.rsc"
+
+    - name: Gather OSPF Neighbors
+      routeros_command:
+        commands:
+          - /routing ospf neighbor print detail
+      register: ospf_neighbors
+
+    - name: Save OSPF Neighbors to file
+      copy:
+        content: "{{ ospf_neighbors.stdout }}"
+        dest: "./ospf/{{ inventory_hostname }}_ospf_neighbors.txt"
+
+    - name: Print OSPF topology
+      debug:
+        var: ospf_neighbors.stdout_lines
+
+    - name: Print full config
+      debug:
+        var: full_config.stdout_lines
