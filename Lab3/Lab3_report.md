@@ -112,6 +112,8 @@ Date of finished: 07.12.2024
    ln -s /opt/netbox/contrib/netbox-housekeeping.sh /etc/cron.daily/netbox-housekeeping
    ```
    
+   ![image](https://github.com/user-attachments/assets/e236cb10-310c-49ee-b266-76eecffa49bb)    
+
    Шаг 5 – Запустить сервер Netbox
    Запустить сервер NetBox с помощью следующей команды.
    ```
