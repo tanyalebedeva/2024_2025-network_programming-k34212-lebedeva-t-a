@@ -23,6 +23,8 @@ Date of finished: 07.12.2024
 С помощью Ansible и Netbox собрать всю возможную информацию об устройствах и сохранить их в отдельном файле.
 
 ## Ход работы
+Инструкция по установке NetBox IRM на Ubuntu 24.04.1 LTS: https://dzen.ru/a/ZxpR4ABlFzJRNJyn    
+
 1. Поднять Netbox на дополнительной VM.
    Шаг 1 – Установить PostgreSQL Server
    NetBox использует PostgreSQL в качестве ядра базы данных, поэтому нужно установить его на свой сервер. Можно установить его с помощью следующей команды.
@@ -51,6 +53,8 @@ Date of finished: 07.12.2024
    ```
    redis-server -v
    ```
+   ![image](https://github.com/user-attachments/assets/b82d77d3-9149-412f-9333-af38350dc93c)
+
    Шаг 3 – Установка Netbox
    Необходимо установить все необходимые зависимости.
    ```
@@ -66,6 +70,8 @@ Date of finished: 07.12.2024
    git clone -b master —depth 1 https://github.com/netbox-community/netbox.git .
    git config —global —add safe.directory /opt/netbox
    ```
+   ![image](https://github.com/user-attachments/assets/f0406f0c-fd23-49f2-a8ed-707c12872ff8)
+   
    Далее создать пользователя и группу для NetBox.
    ```
    adduser —system —group netbox
