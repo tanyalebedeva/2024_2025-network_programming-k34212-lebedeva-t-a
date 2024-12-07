@@ -8,7 +8,7 @@ Group: K34212
 
 Author: Lebedeva Tatiana Alexandrovna
 
-Lab: Lab1
+Lab: Lab3
 
 Date of create: 01.12.2024
 
