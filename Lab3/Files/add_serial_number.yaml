@@ -1,0 +1,52 @@
+---
+- name: Get Serial Number from CHR
+  hosts: chr_host
+  gather_facts: false
+
+  tasks:
+    - name: Get Serial Number
+      community.routeros.command:
+        commands:
+          - /system license print
+      register: serial_output
+
+    - name: Debug Serial Output
+      debug:
+        msg: "{{ serial_output.stdout_lines }}"
+
+    - name: Parse and Clean Serial Number
+      set_fact:
+        serial_number: >-
+          {{
+            (serial_output.stdout_lines[0] | select('search', '^system-id: ') | list | first)
+            | regex_replace('^system-id:\\s+', '')
+          }}
+
+    - name: Debug Cleaned Serial Number
+      debug:
+        msg: "Cleaned Serial Number: {{ serial_number }}"
+
+- name: Update Serial Number in NetBox
+  hosts: localhost
+  gather_facts: false
+  vars:
+    netbox_url: "http://127.0.0.1:8000"
+    netbox_token: "6d06eba72501d94f3b787d09e43ea3da3e8367fb"
+
+  tasks:
+    - name: Update Serial Number in NetBox
+      uri:
+        url: "{{ netbox_url }}/api/dcim/devices/2/"
+        method: PATCH
+        headers:
+          Authorization: "Token {{ netbox_token }}"
+          Content-Type: "application/json"
+        body:
+          serial: "{{ hostvars['chr_host'].serial_number }}"
+        body_format: json
+        validate_certs: no
+      register: update_response
+
+    - name: Debug Update Response
+      debug:
+        var: update_response
