@@ -52,12 +52,21 @@ make run
 Пинг не поддерживается:    
 ![image](https://github.com/user-attachments/assets/af00785a-47fb-409d-bc33-8f511061aa81)    
 
-![image](https://github.com/user-attachments/assets/8419a37f-ca00-44a5-8101-ef9c2b324757)    
+В файле `basic_tunnel.p4` необходимо внести изменения:
+Проверим заголовок header myTunnel_t, который содержит идентификатор протокола и коммутатора приёма.    
+
+![image](https://github.com/user-attachments/assets/8419a37f-ca00-44a5-8101-ef9c2b324757)      
+
+В разделе parser добавьте разбор заголовков Ethernet и IPv4.       
 
 ![image](https://github.com/user-attachments/assets/94d8c52c-ef91-4efa-a542-d56d27d6ade4)     
 
-![image](https://github.com/user-attachments/assets/deee17eb-604b-4ee0-bd81-ef17aa549ef5)      
+В разделе ingress реализовать действия для пересылки пакетов.     
 
+![image](https://github.com/user-attachments/assets/deee17eb-604b-4ee0-bd81-ef17aa549ef5)       
+
+В разделе deparser добавить сборку пакетов.
+ 
 ![image](https://github.com/user-attachments/assets/1a5d2f7d-a70a-453b-b2c2-66d86a769fa5)     
 
 ![image](https://github.com/user-attachments/assets/d6389dad-6489-4bf6-9dc9-ec88d4fc64e5)    
