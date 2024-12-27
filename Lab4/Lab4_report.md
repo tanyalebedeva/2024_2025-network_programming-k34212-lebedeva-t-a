@@ -81,18 +81,27 @@ make run
 
 Включить обработку заголовка туннеля в deparser.
 
-![image](https://github.com/user-attachments/assets/3428ca20-70a9-4f5e-b9ed-68f06c7c99bf)     
+![image](https://github.com/user-attachments/assets/3428ca20-70a9-4f5e-b9ed-68f06c7c99bf)      
+
+Запустить мининет. 
 
 ![image](https://github.com/user-attachments/assets/4923b097-6554-4f52-95cd-e13e9cc9c7f6)     
 
+ Проверить связность mininet> xterm h1 h2     
+
 ![image](https://github.com/user-attachments/assets/e1222968-b866-4a79-b0e8-e71d7af88a07)     
+
+Проверить корректность работы без туннелирования `./send.py 10.0.2.2 "message"`    
 
 ![image](https://github.com/user-attachments/assets/fcfc0200-567f-4bed-b3e8-908d00a44600)     
 
+Проверить работу с туннелированием `./send.py 10.0.2.2 "message" --dst_id 2`     
+
 ![image](https://github.com/user-attachments/assets/41b21a5e-7e4f-4e10-87c5-f985a84cba41)     
 
-![image](https://github.com/user-attachments/assets/2f9fa99b-d9e5-47ae-a7e3-c0076448194e)
+Проверить работу проверки IP `./send.py 10.0.222.2 "message" --dst_id 2`    
 
+![image](https://github.com/user-attachments/assets/2f9fa99b-d9e5-47ae-a7e3-c0076448194e)
 
 ### Вывод
 В ходе данной работы были реализованы базовая переадресация и туннелирование с помощью языка P4
