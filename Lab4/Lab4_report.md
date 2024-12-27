@@ -60,16 +60,26 @@ make run
 ![image](https://github.com/user-attachments/assets/94d8c52c-ef91-4efa-a542-d56d27d6ade4)     
 В разделе deparser добавить сборку пакетов.     
 
-![image](https://github.com/user-attachments/assets/deee17eb-604b-4ee0-bd81-ef17aa549ef5)       
-
+![image](https://github.com/user-attachments/assets/deee17eb-604b-4ee0-bd81-ef17aa549ef5)        
+Проверяем    
  
-![image](https://github.com/user-attachments/assets/1a5d2f7d-a70a-453b-b2c2-66d86a769fa5)     
+![image](https://github.com/user-attachments/assets/1a5d2f7d-a70a-453b-b2c2-66d86a769fa5)    
+
+#### Реализация базового туннелирования
+В файле basic_tunnel.p4 внесем изменения:
+Проверить заголовок header myTunnel_t, который содержит идентификатор протокола и коммутатора приёма.
 
 ![image](https://github.com/user-attachments/assets/d6389dad-6489-4bf6-9dc9-ec88d4fc64e5)    
 
-![image](https://github.com/user-attachments/assets/281640f1-f227-4708-a41a-a33ef8c3a34e)    
+В разделе Parsers добавить состояние state parse_myTunnel и включим его в оператор select.     
+
+![image](https://github.com/user-attachments/assets/281640f1-f227-4708-a41a-a33ef8c3a34e)     
+
+Реализовать логику обработки туннелированных пакетов в ingress.
 
 ![image](https://github.com/user-attachments/assets/f60c91fc-f12c-4667-99b3-d94bccbac1be)    
+
+Включить обработку заголовка туннеля в deparser.
 
 ![image](https://github.com/user-attachments/assets/3428ca20-70a9-4f5e-b9ed-68f06c7c99bf)     
 
