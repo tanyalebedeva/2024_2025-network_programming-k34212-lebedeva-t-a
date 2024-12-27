@@ -16,6 +16,20 @@ Date of finished: 27.12.2024
 ### Цель работы
 Изучить синтаксис языка программирования P4 и выполнить 2 задания обучающих задания от Open network foundation для ознакомления на практике с P4.
 
----
 
 ### Ход работы
+Данную лабораторную работу рекомендуется начать с изучения P416 Language Specification, этот документ поможет вам в первоначальном представлении о языке программирования P4.
+Перед выполнением лабораторной работы вам необходимо выполнить следующие задачи:
+1. Склонировать репозиторий p4lang/tutorials
+   ![image](https://github.com/user-attachments/assets/72fe226d-b322-4c93-bf71-f3da6a96ee04)
+
+3. Установить Vagrant и VirtualBox
+   ![image](https://github.com/user-attachments/assets/61cba581-637b-430f-8877-ca68e1f7e520)
+
+5. Перейти в папку cd vm-ubuntu-20.04
+   ![image](https://github.com/user-attachments/assets/33ac7a4e-785d-4b46-bd06-5262c7e020b7)    
+
+7. Используя Vagrant развернуть тестовую среду vagrant up
+   ![image](https://github.com/user-attachments/assets/07601eb1-69d2-46a0-8242-eb8cd77fd93c)    
+   
+В результате установки у вас появится виртуальная машина с аккаунтами login/password vagrant/vagrant и p4/p4
