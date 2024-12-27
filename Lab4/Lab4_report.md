@@ -74,6 +74,13 @@ make run
 
 ![image](https://github.com/user-attachments/assets/fcfc0200-567f-4bed-b3e8-908d00a44600)     
 
+![image](https://github.com/user-attachments/assets/41b21a5e-7e4f-4e10-87c5-f985a84cba41)     
+
+![image](https://github.com/user-attachments/assets/2f9fa99b-d9e5-47ae-a7e3-c0076448194e)
+
+
+### Вывод
+В ходе данной работы были реализованы базовая переадресация и туннелирование с помощью языка P4
 
 
 
