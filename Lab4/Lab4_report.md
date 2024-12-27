@@ -50,7 +50,13 @@ make run
 ![image](https://github.com/user-attachments/assets/5ef048ab-e917-467a-8973-84fc5342fe2a)    
 
 Пинг не поддерживается:    
-![image](https://github.com/user-attachments/assets/af00785a-47fb-409d-bc33-8f511061aa81)
+![image](https://github.com/user-attachments/assets/af00785a-47fb-409d-bc33-8f511061aa81)    
+
+![image](https://github.com/user-attachments/assets/8419a37f-ca00-44a5-8101-ef9c2b324757)    
+
+![image](https://github.com/user-attachments/assets/94d8c52c-ef91-4efa-a542-d56d27d6ade4)    
+
+
 
 
 
